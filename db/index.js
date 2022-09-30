@@ -13,7 +13,7 @@ Cats.belongsTo(Humans, { as: 'owner' });
 // This also works:
 // Cats.belongsTo(Humans, {
 // 	as: 'owner',
-// 	foreignKey: 'ownerId',
+// 	foreignKey: 'ownerId', // This line is optional
 // });
 
 module.exports = {

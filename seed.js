@@ -48,12 +48,6 @@ const seedDb = async () => {
 	rose.addCat(abby);
 	rose.addCat(sparky);
 	rose.addCat(wendy);
-
-	console.log('Human Magic Methods in here:');
-	console.log(Object.keys(Humans.prototype));
-
-	console.log('\nCats Magic Methods in here:');
-	console.log(Object.keys(Cats.prototype));
 };
 
 seedDb();
