@@ -109,6 +109,13 @@ Tweets.belongsTo(User);
 User.hasMany(Tweets);
 ```
 
+- One-to-Many where you want the insertedId to be a different name:
+
+```js
+Humans.hasMany(Cats, { foreignKey: 'ownerId' });
+Cats.belongsTo(Humans, { as: 'owner' });
+```
+
 - One-to-many self-referencing:
   - For self referencing you will need to use `as:` for semantic reasons and `foreignKey`
 

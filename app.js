@@ -6,30 +6,17 @@ const app = express();
 const volleyball = require('volleyball');
 app.use(volleyball);
 
-// Method Override: Allows DELETE reqest from an html form
-const methodOverride = require('method-override');
-app.use(methodOverride('_method'));
-
-// Static Middleware (Public folder)
-const path = require('path');
-// eslint-disable-next-line no-undef
-const staticMiddleware = express.static(path.join(__dirname, 'public'));
-app.use(staticMiddleware);
-
 // Body Parsers
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Import Views
-
 // Define Routes
-// Define routes
-app.use('/route0', require('./routes/route0'));
-app.use('/route1', require('./routes/route1'));
+app.use('/humans', require('./routes/humans'));
+app.use('/cats', require('./routes/cats'));
 
 // Import Database + Models
 // Make sure the module.exports matches!
-const { Players, Games, PlayersGames } = require('./db');
+const { Humans, Cats } = require('./db');
 
 app.get('/', (req, res, next) => {
 	try {
@@ -38,7 +25,18 @@ app.get('/', (req, res, next) => {
 		next(error);
 	}
 });
-const PORT = 3000;
+
+app.get('/magicMethods', (req, res, next) => {
+	try {
+		const humansMM = Object.keys(Humans.prototype);
+		const catsMM = Object.keys(Cats.prototype);
+
+		console.log(`Human Magic Methods in here: ${humansMM}`);
+	} catch (error) {
+		next(error);
+	}
+});
+const PORT = 1337;
 app.listen(PORT, () => {
 	console.log(`Listening to port ${PORT}...`);
 });

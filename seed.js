@@ -2,7 +2,7 @@
 // If you are using raw SQL you must create a .sql file!
 
 // Import Models
-const { db, Humans, Cats } = require('./server');
+const { db, Humans, Cats } = require('./db');
 
 // Anton has a cat named Kafka.
 // Erica has two cats named Ava and Misshi.
@@ -39,7 +39,6 @@ const seedDb = async () => {
 	const [kafka, ava, misshi, abby, sparky, wendy] = await Promise.all(
 		catPromises
 	);
-
 	// You can set the relationships between the models using magic methods!
 	anton.addCat(kafka);
 
@@ -49,6 +48,12 @@ const seedDb = async () => {
 	rose.addCat(abby);
 	rose.addCat(sparky);
 	rose.addCat(wendy);
+
+	console.log('Human Magic Methods in here:');
+	console.log(Object.keys(Humans.prototype));
+
+	console.log('\nCats Magic Methods in here:');
+	console.log(Object.keys(Cats.prototype));
 };
 
 seedDb();

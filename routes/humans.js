@@ -1,16 +1,17 @@
 const router = require('express').Router();
 
 // Don't forget to import any databases, models, or views you need!
+const { Humans, Cats } = require('../db');
 
-// Import views
-const form = require('../views/form');
-
-// An example GET req.
-// Use async await if you need. Otherwise delete async!
+// GET localhost:1337/humans/all
+// Returns all humans
 router.get('/', async (req, res, next) => {
 	try {
-		const html = form();
-		res.send(html);
+		res.send(
+			await Humans.findAll({
+				include: [Cats],
+			})
+		);
 	} catch (error) {
 		next(error);
 	}

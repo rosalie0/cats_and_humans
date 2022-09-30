@@ -6,8 +6,15 @@ const Humans = require('./humans');
 const Cats = require('./cats');
 
 // Model Associations go here
-Humans.hasMany(Cats, { as: 'owner' });
-Cats.belongsTo(Humans);
+Humans.hasMany(Cats, { foreignKey: 'ownerId' });
+
+Cats.belongsTo(Humans, { as: 'owner' });
+
+// This also works:
+// Cats.belongsTo(Humans, {
+// 	as: 'owner',
+// 	foreignKey: 'ownerId',
+// });
 
 module.exports = {
 	db,
